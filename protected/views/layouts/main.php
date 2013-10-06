@@ -37,7 +37,7 @@
                             ),
                             array(
                                 'label' => 'Settings',
-                                'url' => array('/site/settings'),
+                                'url' => array('/site/password'),
                                 'visible' => !Yii::app()->user->isGuest
                             ),
                             array(
