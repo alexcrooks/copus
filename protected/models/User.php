@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'user':
  * @property integer $id
+ * @property string $role
  * @property string $username
  * @property string $password
  * @property string $email
@@ -26,15 +27,12 @@ class User extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
 			array('username, password, email', 'required'),
-			array('username, password, email', 'length', 'max'=>128),
+			array('role, username, password, email', 'length', 'max'=>128),
 			array('first_name, last_name', 'safe'),
 			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id, username, password, email, first_name, last_name', 'safe', 'on'=>'search'),
+			array('id, role, username, email, first_name, last_name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,6 +54,7 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'role' => 'Role',
 			'username' => 'Username',
 			'password' => 'Password',
 			'email' => 'Email',
@@ -83,6 +82,7 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('role',$this->role,true);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('email',$this->email,true);
