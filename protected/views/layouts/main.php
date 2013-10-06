@@ -5,7 +5,7 @@
     <meta name="language" content="en">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <?php
-    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main.css');
+    Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/main.css');
     ?>
 </head>
 <body>
@@ -18,15 +18,27 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="brand" href="#"><?php echo CHtml::encode(Yii::app()->name); ?></a>
+
             <div class="nav-collapse collapse">
-                <?php $this->widget('bootstrap.widgets.TbMenu', array(
+                <?php $this->widget(
+                    'bootstrap.widgets.TbMenu',
+                    array(
                         'items' => array(
-                            array('label'=>'Home', 'url'=>array('/site/index')),
-                            array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-                            array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-                            array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+                            array('label' => 'Home', 'url' => array('/site/index')),
+                            array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
+                            array(
+                                'label' => 'Login',
+                                'url' => array('/site/login'),
+                                'visible' => Yii::app()->user->isGuest
+                            ),
+                            array(
+                                'label' => 'Logout (' . Yii::app()->user->name . ')',
+                                'url' => array('/site/logout'),
+                                'visible' => !Yii::app()->user->isGuest
+                            )
                         ),
-                    )); ?>
+                    )
+                ); ?>
             </div>
         </div>
     </div>
