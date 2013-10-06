@@ -25,7 +25,21 @@
                     array(
                         'items' => array(
                             array('label' => 'Home', 'url' => array('/site/index')),
-                            array('label' => 'About', 'url' => array('/site/page', 'view' => 'about')),
+                            array(
+                                'label' => 'New Session',
+                                'url' => array('/session/new'),
+                                'visible' => !Yii::app()->user->isGuest
+                            ),
+                            array(
+                                'label' => 'Administration',
+                                'url' => array('/admin/index'),
+                                'visible' => !Yii::app()->user->isGuest
+                            ),
+                            array(
+                                'label' => 'Settings',
+                                'url' => array('/site/settings'),
+                                'visible' => !Yii::app()->user->isGuest
+                            ),
                             array(
                                 'label' => 'Login',
                                 'url' => array('/site/login'),
