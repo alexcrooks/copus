@@ -26,3 +26,6 @@ body {
     margin-bottom: 15px;
     padding: 7px 9px;
 }
+
+.table { width: 50%; }
+.table thead tr td { font-weight: bold; }

@@ -29,9 +29,10 @@ class User extends CActiveRecord
     {
         return array(
             array('username, password, email', 'required'),
+            array('username, email', 'unique'),
+            array('email', 'email'),
             array('role, username, password, email', 'length', 'max' => 128),
             array('first_name, last_name', 'safe'),
-            // The following rule is used by search().
             array('id, role, username, email, first_name, last_name', 'safe', 'on' => 'search'),
         );
     }
