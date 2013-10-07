@@ -8,7 +8,7 @@ class AdminController extends Controller
         $this->render('index', array('users' => $users));
     }
 
-    public function actionUser($id)
+    public function actionUser()
     {
         $model = new UserForm;
 
@@ -16,11 +16,11 @@ class AdminController extends Controller
             $model->attributes = $_POST['UserForm'];
 
             if ($model->validate() && $model->updateUser()) {
+                // email address w/ password
                 $this->redirect(Yii::app()->user->returnUrl);
             }
         }
-        $user = User::model()->findByAttributes(array('id' => $id));
-        $this->render('user', array('user' => $user, 'model' => $model));
+        $this->render('user', array('model' => $model));
     }
 
     public function actionError()

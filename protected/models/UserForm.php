@@ -13,13 +13,17 @@ class UserForm extends CFormModel
 
     public function init()
     {
-        $this->_user = User::model()->findByAttributes(array('id' => $_GET['id']));
-        $this->id = $this->_user->id;
-        $this->username = $this->_user->username;
-        $this->email = $this->_user->email;
-        $this->first_name = $this->_user->first_name;
-        $this->last_name = $this->_user->last_name;
-        $this->role = $this->_user->role;
+        if (isset($_GET['id'])) {
+            $this->_user = User::model()->findByAttributes(array('id' => $_GET['id']));
+            $this->id = $this->_user->id;
+            $this->username = $this->_user->username;
+            $this->email = $this->_user->email;
+            $this->first_name = $this->_user->first_name;
+            $this->last_name = $this->_user->last_name;
+            $this->role = $this->_user->role;
+        } else {
+            $this->role = 'user';
+        }
     }
 
     public function rules()
@@ -34,7 +38,12 @@ class UserForm extends CFormModel
 
     public function updateUser()
     {
-        $user = User::model()->findByAttributes(array('id' => $this->id));
+        if ($this->id) {
+            $user = User::model()->findByAttributes(array('id' => $this->id));
+        } else {
+            $user = new User;
+            $user->password = crypt(uniqid());
+        }
         $user->username = $this->username;
         $user->email = $this->email;
         $user->first_name = $this->first_name;
