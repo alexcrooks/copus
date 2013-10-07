@@ -17,7 +17,7 @@ class AdminController extends Controller
 
             if ($model->validate() && $model->updateUser()) {
                 // email address w/ password
-                $this->redirect(Yii::app()->user->returnUrl);
+                $this->redirect(Yii::app()->createUrl('admin/index'));
             }
         }
         $this->render('user', array('model' => $model));
