@@ -17,6 +17,7 @@ $this->pageTitle = Yii::app()->name . ' - Administration';
 ); ?>
 <h2 class="form-signin-heading">Update user</h2>
 <?php echo $form->textField($model, 'username', array('placeholder' => 'Username')); ?>
+<?php echo $form->dropDownList($model, 'role', array('user' => 'User', 'admin' => 'Admin')); ?>
 <?php echo $form->textField($model, 'email', array('placeholder' => 'Email address')); ?>
 <?php echo $form->textField($model, 'first_name', array('placeholder' => 'First name')); ?>
 <?php echo $form->textField($model, 'last_name', array('placeholder' => 'Last name')); ?>
@@ -24,6 +25,7 @@ $this->pageTitle = Yii::app()->name . ' - Administration';
 <?php echo $form->error($model, 'email'); ?>
 <?php echo $form->error($model, 'first_name'); ?>
 <?php echo $form->error($model, 'last_name'); ?>
+<?php echo $form->error($model, 'role'); ?>
 
 <?php $this->widget(
     'bootstrap.widgets.TbButton',
