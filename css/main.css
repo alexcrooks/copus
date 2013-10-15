@@ -32,7 +32,19 @@ body {
 .table-lg { width: 100%; }
 .table thead tr td { font-weight: bold; }
 
-.ico { width: 16px; height: 16px; }
-.ico-printer { background-image: url('../images/printer.png'); }
-.ico-excel { background-image: url('../images/page_excel.png'); }
-.ico-graph { background-image: url('../images/chart_pie.png'); }
+.observation-print-view .page-header { margin-top: 60px; font-size: 14pt; font-weight: bold; }
+.observation-print-view blockquote { border: 0; }
+.observation-print-view .table-print-info { margin-top: 40px; }
+.observation-print-view .table-print-info td { vertical-align: top; }
+.observation-print-view .table-print-info td strong { display: block; margin-bottom: 10px; }
+.observation-print-view .table-print-info .info-section span { display: block; font-weight: bold; }
+.observation-print-view .table-print-data { page-break-after: always; }
+.observation-print-view .table-print-data .header td { font-weight: bold; text-align: center; }
+.observation-print-view .table-print-data .subheader td { padding: 1px; text-align: center; }
+.observation-print-view .table-print-data td { margin: 0; padding: 0; min-width: 0; min-height: 0; }
+.observation-print-view .table-print-data td.data-taken { min-width: 20px; min-height: 20px; }
+.observation-print-view .table-print-data img.data-taken { width: 100%; height: 100%; }
+
+@media print {
+    .navbar { display: none; }
+}

@@ -36,7 +36,16 @@ class ObservationController extends Controller
     public function actionPrint($id)
     {
         $observation = Observation::model()->find('id = :id', array(':id' => $id));
-        $this->render('print', array('observation' => $observation));
+        $data = json_decode($observation->data, true);
+        $tableElements = self::getTableElements();
+
+        $outOfClass = array();
+        $outOfClass[] = isset($data['class_ooc_homework']) ? 'Homework' : '';
+        $outOfClass[] = isset($data['class_ooc_prereading']) ? 'Pre-Readings' : '';
+        $outOfClass[] = isset($data['class_ooc_labs']) ? 'Labs' : '';
+        $outOfClass[] = isset($data['class_ooc_projects']) ? 'Projects' : '';
+        $outOfClass = array_filter($outOfClass);
+        $this->render('print', array('data' => $data, 'tableElements' => $tableElements, 'outOfClass' => $outOfClass));
     }
 
     public function actionExcel($id)
