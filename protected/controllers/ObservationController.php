@@ -175,7 +175,19 @@ class ObservationController extends Controller
     public function actionGraph($id)
     {
         $observation = Observation::model()->find('id = :id', array(':id' => $id));
-        $this->render('graph', array('observation' => $observation));
+        $data = json_decode($observation->data, true);
+
+        if (isset($_POST['GraphForm'])) {
+            $this->render('graph', array('observation' => $observation, 'observationData' => $data, 'graphSettings' => $_POST['GraphForm']));
+        } else {
+            $model = new GraphForm;
+
+            $timeArray = [];
+            for ($i = 0; $i <= ($data['time'] + 2); $i += 2) {
+                $timeArray[$i] = $i;
+            }
+            $this->render('graph-form', array('model' => $model, 'timeArray' => $timeArray));
+        }
     }
 
     public function actionError()
@@ -232,5 +244,73 @@ class ObservationController extends Controller
             'instructor_W' => 'Waiting (opportunity for instructor to be doing something and not doing so)',
             'instructor_O' => 'Other'
         );
+    }
+
+    /**
+     * Cleans up an array to leave only the requested elements as per param typeToKeep
+     *
+     * @param typeToKeep The type of data to keep ('student', 'instructor', 'Eng')
+     * @param array The data to be cleaned.
+     * @returns A cleaned up array.
+     */
+    public function cleanArray($typeToKeep, $array)
+    {
+        foreach ($array as $key => $value) {
+            if (strpos($key, 'table_' . $typeToKeep) === false) {
+                unset($array[$key]);
+            }
+        }
+        return $array;
+    }
+
+    /**
+     * Counts the data input as appropriate for a pie chart distribution of events.
+     *
+     * This converts the CDOP data to something that can be read by Google's
+     * graphing API. The elements are formatted as: ['name', #], ['name', #], etc.
+     *
+     * @param array The data to be counted.
+     * @param time_start The index in which to start counting for the array.
+     * @param time_end The index in which to end counting for the array.
+     * @returns An data set in the format as detailed above.
+     */
+    public function countForPieChartDist($array, $time_start, $time_end)
+    {
+        $key_start = $time_start / 2; // key = time / 2;
+        $key_end = $time_end / 2;
+        $return = array();
+
+        foreach ($array as $key => $value) {
+            foreach ($value as $keyb => $valueb) {
+                if (($key_start > $keyb) || ($key_end < $keyb)) {
+                    // This is not within our time range -- goodbye.
+                    unset($array[$key][$keyb]);
+                }
+            }
+            // ['name'], #] where 'name' has the table_ prefix removed.
+            $return[] = "['".substr(str_replace(array('student_', 'instructor_'), '', $key), 6)."', ".count($array[$key])."]";
+        }
+        return implode(', ', $return);
+    }
+
+    // Same as above but for Eng codes
+    public function countEngForPieChartDist($array, $time_start, $time_end)
+    {
+        $key_start = $time_start / 2; // key = time / 2;
+        $key_end = $time_end / 2;
+        $return = array();
+
+        foreach ($array['table_Eng'] as $key => $value) {
+            if (($key_start > $key) || ($key_end < $key)) {
+                // This is not within our time range -- goodbye.
+                unset($array['table_Eng'][$key]);
+            }
+        }
+        foreach (array_count_values($array['table_Eng']) as $key => $value) {
+            if ($key != "") {
+                $return[] = "['".$key."', ".$value."]";
+            }
+        }
+        return implode(', ', $return);
     }
 }
