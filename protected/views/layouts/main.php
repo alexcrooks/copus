@@ -27,7 +27,7 @@
                             array('label' => 'Home', 'url' => array('/site/index')),
                             array(
                                 'label' => 'New Session',
-                                'url' => array('/session/new'),
+                                'url' => array('/observation/create'),
                                 'visible' => !Yii::app()->user->isGuest
                             ),
                             array(

@@ -28,4 +28,11 @@ body {
 }
 
 .table { width: 50%; }
+.table-med { width: 75%; }
+.table-lg { width: 100%; }
 .table thead tr td { font-weight: bold; }
+
+.ico { width: 16px; height: 16px; }
+.ico-printer { background-image: url('../images/printer.png'); }
+.ico-excel { background-image: url('../images/page_excel.png'); }
+.ico-graph { background-image: url('../images/chart_pie.png'); }

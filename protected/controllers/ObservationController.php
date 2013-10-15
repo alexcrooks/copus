@@ -1,6 +1,6 @@
 <?php
 
-class SiteController extends Controller
+class ObservationController extends Controller
 {
     public function filters()
     {
@@ -12,11 +12,6 @@ class SiteController extends Controller
     public function accessRules()
     {
         return array(
-            array(
-                'allow',
-                'actions' => array('login'),
-                'users' => array('?'),
-            ),
             array(
                 'deny',
                 'users' => array('?'),
@@ -32,10 +27,27 @@ class SiteController extends Controller
             ),
         );
     }
-    public function actionIndex()
+
+    public function actionCreate()
     {
-        $observations = Observation::model()->findAll('user_id = :uid', array(':uid' => Yii::app()->user->id));
-        $this->render('index', array('observations' => $observations));
+        $this->render('create');
+    }
+
+    public function actionPrint($id)
+    {
+        $observation = Observation::model()->find('id = :id', array(':id' => $id));
+        $this->render('print', array('observation' => $observation));
+    }
+
+    public function actionExcel($id)
+    {
+        $observation = Observation::model()->find('id = :id', array(':id' => $id));
+    }
+
+    public function actionGraph($id)
+    {
+        $observation = Observation::model()->find('id = :id', array(':id' => $id));
+        $this->render('graph', array('observation' => $observation));
     }
 
     public function actionError()
@@ -63,23 +75,4 @@ class SiteController extends Controller
         $this->render('login', array('model' => $model));
     }
 
-    public function actionLogout()
-    {
-        Yii::app()->user->logout();
-        $this->redirect(Yii::app()->homeUrl);
-    }
-
-    public function actionPassword()
-    {
-        $model = new PasswordForm;
-
-        if (isset($_POST['PasswordForm'])) {
-            $model->attributes = $_POST['PasswordForm'];
-
-            if ($model->validate() && $model->changePassword()) {
-                $this->redirect(Yii::app()->user->returnUrl);
-            }
-        }
-        $this->render('password', array('model' => $model));
-    }
 }
