@@ -191,7 +191,7 @@ class ObservationController extends Controller
         } else {
             $model = new GraphForm;
 
-            $timeArray = [];
+            $timeArray = array();
             for ($i = 0; $i <= ($data['time'] + 2); $i += 2) {
                 $timeArray[$i] = $i;
             }
