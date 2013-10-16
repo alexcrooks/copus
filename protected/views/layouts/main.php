@@ -25,6 +25,7 @@
                     array(
                         'items' => array(
                             array('label' => 'Home', 'url' => array('/site/index')),
+                            array('label' => 'About', 'url' => 'http://www.cwsei.ubc.ca/resources/COPUS.htm', 'linkOptions' => array('target' => '_blank')),
                             array(
                                 'label' => 'New Session',
                                 'url' => array('/observation/create'),
