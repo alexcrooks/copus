@@ -3,8 +3,6 @@ Built for the Carl Wieman Science Education Initiative. This app is meant to fac
 
 See more on COPUS: http://www.cwsei.ubc.ca/resources/COPUS.htm
 
-A logistics management system for shipping agencies
-
 * [Installation](#installation)
 * [Style Guide](#style-guide)
     * [PHP](#style-guide-php)
@@ -22,8 +20,8 @@ A logistics management system for shipping agencies
 4. > cd /path/to/copus/
 5. > cp index.php.tmpl index.php
 5a. If in development mode, add the following lines before "require_once($yii);" to display errors:
-```defined('YII_DEBUG') or define('YII_DEBUG',true);
-defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);```
+```defined('YII_DEBUG') or define('YII_DEBUG',true);```  
+```defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);```
 6. > cp protected/config/main.php.tmpl protected/config/main.php
 6a. Replace <DB_NAME>, <DB_USERNAME>, <DB_PASSWORD>
 7. Run the app (e.g. visit http://localhost/copus in your browser)
@@ -49,14 +47,14 @@ Use [Google's HTML and CSS style guide](http://google-styleguide.googlecode.com/
 ###<a name="architecture-backend">Back-end</a>
 The back-end uses the following technologies:
 
-PHP 5.2.17
-MySQL 14.14
+PHP 5.2.17  
+MySQL 14.14  
 Yii Framework 1.1.14
 
 ###<a name="architecture-frontend">Front-end</a>
 The front-end of COPUS uses static HTML, CSS and Javascript (non-framework). In addition, the following technologies are utilised:
 
-Bootstrap 2.3.2
+Bootstrap 2.3.2  
 jQuery 1.8.3
 
 The front-end is built for Google Chrome but works for other browsers.
