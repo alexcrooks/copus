@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var updateClockInterval = 1000;
-    var addRowInterval = 3; // in seconds
+    var addRowInterval = 120; // in seconds
     var observationTime = 0;
     var currentlyObserving = false;
     var modelTableRow = $('.row_to_clone').clone();
