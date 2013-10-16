@@ -42,13 +42,30 @@ class UserForm extends CFormModel
             $user = User::model()->findByAttributes(array('id' => $this->id));
         } else {
             $user = new User;
-            $user->password = crypt(uniqid());
+            $dirtyPassword = uniqid();
+            $user->password = crypt($dirtyPassword);
         }
         $user->username = $this->username;
         $user->email = $this->email;
         $user->first_name = $this->first_name;
         $user->last_name = $this->last_name;
         $user->role = $this->role;
-        return (bool) $user->save();
+
+        if (YII_DEBUG == true)
+            return $user->save();
+        else
+            return $user->save() && $this->emailUser($user, $dirtyPassword);
+    }
+
+    private function emailUser($user, $dirtyPassword)
+    {
+        $to = $user->email;
+        $subject = "Account Created on COPUS";
+        $message = "Hello " . $user->first_name . "\n\n"
+            . "An account has been created for you on the COPUS app. You may access it at the following URL: " . Yii::app()->createAbsoluteUrl('site/index') . "\n\n"
+            . "Your username is: " . $user->username . "\n"
+            . "Your password is: " . $dirtyPassword . "\n\n"
+            . "You may change your password once you log in by going to the 'Settings' page.";
+        return mail($to, $subject, $message);
     }
 }
