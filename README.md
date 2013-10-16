@@ -23,7 +23,7 @@ See more on COPUS: http://www.cwsei.ubc.ca/resources/COPUS.htm
 ```defined('YII_DEBUG') or define('YII_DEBUG',true);```  
 ```defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);```
 7. > cp protected/config/main.php.tmpl protected/config/main.php
-8. Replace <DB_NAME>, <DB_USERNAME>, <DB_PASSWORD>
+8. Replace &lt;DB_NAME&gt;, &lt;DB_USERNAME&gt;, &lt;DB_PASSWORD&gt;
 9. Run the app (e.g. visit http://localhost/copus in your browser)
 
 ##<a name="style-guide">Style Guide</a>
