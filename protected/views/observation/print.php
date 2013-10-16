@@ -1,7 +1,7 @@
 <?php $this->pageTitle = Yii::app()->name; ?>
 <div class="observation-print-view">
-    <span class="page-header">Classroom Observation Protocol for Undergraduate STEM - COPUS</span>
-    <table class="table-print-info">
+    <span class="observation-page-header">Classroom Observation Protocol for Undergraduate STEM - COPUS</span>
+    <table class="table-observation-info">
         <tr>
             <td>
                 <strong>Observer</strong>
@@ -21,7 +21,7 @@
         </tr>
     </table>
     <br /><br />
-    <table class="table-print-data" border="1">
+    <table class="table-observation-data" border="1">
         <?php for ($i = 0; $i < (($data['time'] + 2) / 2); $i++): ?>
             <?php if ($i % 10 == 0): ?>
                 <tr class="header">
@@ -49,7 +49,7 @@
             </tr>
         <?php endfor; ?>
     </table>
-    <table class="table-print-info">
+    <table class="table-observation-info">
         <tr>
             <td>
                 <strong>Room Information</strong>

@@ -30,11 +30,8 @@ class Observation extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, date, data', 'required'),
+			array('user_id, data', 'required'),
 			array('user_id', 'numerical', 'integerOnly'=>true),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, date, data', 'safe', 'on'=>'search'),
 		);
 	}
 

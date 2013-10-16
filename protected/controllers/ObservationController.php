@@ -30,6 +30,15 @@ class ObservationController extends Controller
 
     public function actionCreate()
     {
+        if (isset($_POST['ObservationForm'])) {
+            $formData = $this->objectToArray($_POST['ObservationForm']);
+            $formData = $this->arrayToCleanJSON($formData);
+            $model = new Observation;
+            $model->user_id = Yii::app()->user->id;
+            $model->data = $formData;
+            if ($model->save())
+                $this->redirect(Yii::app()->createUrl('site/index'));
+        }
         $this->render('create');
     }
 
@@ -201,21 +210,7 @@ class ObservationController extends Controller
         }
     }
 
-    public function actionLogin()
-    {
-        $model = new LoginForm;
-
-        if (isset($_POST['LoginForm'])) {
-            $model->attributes = $_POST['LoginForm'];
-
-            if ($model->validate() && $model->login()) {
-                $this->redirect(Yii::app()->user->returnUrl);
-            }
-        }
-        $this->render('login', array('model' => $model));
-    }
-
-    private static function getTableElements()
+    public static function getTableElements()
     {
         return array(
             'student_L' => 'Listening',
@@ -249,9 +244,9 @@ class ObservationController extends Controller
     /**
      * Cleans up an array to leave only the requested elements as per param typeToKeep
      *
-     * @param typeToKeep The type of data to keep ('student', 'instructor', 'Eng')
-     * @param array The data to be cleaned.
-     * @returns A cleaned up array.
+     * @param $typeToKeep The type of data to keep ('student', 'instructor', 'Eng')
+     * @param $array The data to be cleaned.
+     * @return A cleaned up array.
      */
     public function cleanArray($typeToKeep, $array)
     {
@@ -269,10 +264,10 @@ class ObservationController extends Controller
      * This converts the CDOP data to something that can be read by Google's
      * graphing API. The elements are formatted as: ['name', #], ['name', #], etc.
      *
-     * @param array The data to be counted.
-     * @param time_start The index in which to start counting for the array.
-     * @param time_end The index in which to end counting for the array.
-     * @returns An data set in the format as detailed above.
+     * @param $array The data to be counted.
+     * @param $time_start The index in which to start counting for the array.
+     * @param $time_end The index in which to end counting for the array.
+     * @return An data set in the format as detailed above.
      */
     public function countForPieChartDist($array, $time_start, $time_end)
     {
@@ -312,5 +307,51 @@ class ObservationController extends Controller
             }
         }
         return implode(', ', $return);
+    }
+
+    /**
+     * array_map for multi-dimensional arrays
+     *
+     * @author qeremy (from: http://php.net/manual/en/function.array-map.php)
+     * @param $fn The function that will modify each array element
+     * @param $arr The array to modify
+     * @return array The array with fn applied to each element
+     */
+    public function array_map_recursive($fn, $arr)
+    {
+        $rarr = array();
+        foreach ($arr as $k => $v) {
+            $rarr[$k] = is_array($v)
+                ? $this->array_map_recursive($fn, $v)
+                : call_user_func($fn, $v);
+        }
+        return $rarr;
+    }
+
+    /**
+     * Converts a POSTed object to complete array form.
+     *
+     * @param $object The data to be converted.
+     * @return The converted data.
+     */
+    public function objectToArray($object)
+    {
+        if (is_object($object)) {
+            $object = get_object_vars($object);
+        }
+        return is_array($object)
+            ? array_map(array(__CLASS__, __FUNCTION__), $object)
+            : $object;
+    }
+
+    /**
+     * Converts an array of POSTed data to JSON format and sanitizes the result.
+     *
+     * @param $array The data to be converted and sanitized.
+     * @return A string in JSON form that is cleaned with htmlentities.
+     */
+    public function arrayToCleanJSON($array)
+    {
+        return json_encode($this->array_map_recursive('htmlentities', $array));
     }
 }
