@@ -4,7 +4,7 @@
 $this->pageTitle = Yii::app()->name . ' - Administration';
 ?>
 
-<h1>Manage Users</h1>
+<h2>Manage Users</h2>
 
 <table class="table table-striped">
     <thead>

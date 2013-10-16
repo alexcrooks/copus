@@ -1,6 +1,6 @@
 <?php $this->pageTitle = Yii::app()->name; ?>
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+<h2>Classroom Observation Protocol for Undergraduate STEM</h2>
 
 <table class="table table-med table-striped">
     <thead>
