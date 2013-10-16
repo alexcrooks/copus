@@ -19,12 +19,12 @@ See more on COPUS: http://www.cwsei.ubc.ca/resources/COPUS.htm
 3. Create a database using /path/to/copus/protected/migrations/initial.sql
 4. > cd /path/to/copus/
 5. > cp index.php.tmpl index.php
-5a. If in development mode, add the following lines before "require_once($yii);" to display errors:
+6. If in development mode, add the following lines before "require_once($yii);" to display errors:
 ```defined('YII_DEBUG') or define('YII_DEBUG',true);```  
 ```defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL',3);```
-6. > cp protected/config/main.php.tmpl protected/config/main.php
-6a. Replace <DB_NAME>, <DB_USERNAME>, <DB_PASSWORD>
-7. Run the app (e.g. visit http://localhost/copus in your browser)
+7. > cp protected/config/main.php.tmpl protected/config/main.php
+8. Replace <DB_NAME>, <DB_USERNAME>, <DB_PASSWORD>
+9. Run the app (e.g. visit http://localhost/copus in your browser)
 
 ##<a name="style-guide">Style Guide</a>
 ###<a name="style-guide-php">PHP</a>
