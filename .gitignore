@@ -3,3 +3,4 @@ protected/runtime/
 themes/classic/views/
 protected/config/main.php
 index.php
+misc/
