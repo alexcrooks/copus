@@ -39,7 +39,8 @@ class ObservationController extends Controller
             if ($model->save())
                 $this->redirect(Yii::app()->createUrl('site/index'));
         }
-        $this->render('create');
+        $user = User::model()->findByAttributes(array('id' => Yii::app()->user->id));
+        $this->render('create', array('user' => $user));
     }
 
     public function actionPrint($id)

@@ -31,7 +31,7 @@
             <td>
                 <strong>Observer</strong>
                 <blockquote>
-                    <div><input type="text" name="ObservationForm[observer_name]" placeholder="Name"></div>
+                    <div><input type="text" name="ObservationForm[observer_name]" placeholder="Name" value="<?php echo $user->first_name . ' ' . $user->last_name ?>"></div>
                     <div><input type="text" name="ObservationForm[observer_location]" placeholder="Location in Class"></div>
                 </blockquote>
             </td>
