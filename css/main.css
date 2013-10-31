@@ -1,6 +1,11 @@
 body {
     padding-top: 60px;
 }
+@media (max-width: 979px) {
+    body {
+        padding-top: 0;
+    }
+}
 
 .form-signin {
     max-width: 300px;
