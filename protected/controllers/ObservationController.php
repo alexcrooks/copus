@@ -55,7 +55,7 @@ class ObservationController extends Controller
         $outOfClass[] = isset($data['class_ooc_labs']) ? 'Labs' : '';
         $outOfClass[] = isset($data['class_ooc_projects']) ? 'Projects' : '';
         $outOfClass = array_filter($outOfClass);
-        $this->render('print', array('data' => $data, 'tableElements' => $tableElements, 'outOfClass' => $outOfClass));
+        $this->render('print', array('data' => $data, 'tableElements' => $tableElements, 'outOfClass' => $outOfClass, 'baseUrl' => Yii::app()->request->getBaseUrl(true)));
     }
 
     public function actionExcel($id)
