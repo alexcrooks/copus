@@ -66,6 +66,16 @@ class UserForm extends CFormModel
             . "Your username is: " . $user->username . "\n"
             . "Your password is: " . $dirtyPassword . "\n\n"
             . "You may change your password once you log in by going to the 'Settings' page.";
-        return mail($to, $subject, $message);
+
+        if (Yii::app()->params['useSmtp'] === '<SMTP_USER>') {
+            return mail($to, $subject, $message);
+        } else {
+            $mail = Yii::app()->Smtpmail;
+            $mail->SetFrom(Yii::app()->params['useSmtp'], '');
+            $mail->Subject = $subject;
+            $mail->MsgHTML(nl2br($message));
+            $mail->AddAddress($to, '');
+            return $mail->Send();
+        }
     }
 }

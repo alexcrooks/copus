@@ -55,6 +55,15 @@ return array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
 		),
+        'Smtpmail'=>array(
+            'class'=>'application.extensions.smtpmail.PHPMailer',
+            'Host'=>'<SMTP_HOST>',
+            'Username'=>'<SMTP_USER>',
+            'Password'=>'<SMTP_PW>',
+            'Mailer'=>'smtp',
+            'Port'=>'<SMTP_PORT>',
+            'SMTPAuth'=>true,
+        ),
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
@@ -80,5 +89,6 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'alex@alexcrooks.com',
+		'useSmtp'=>'<SMTP_USER>',
 	),
 );
