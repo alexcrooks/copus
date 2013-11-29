@@ -34,7 +34,7 @@
                             array(
                                 'label' => 'Administration',
                                 'url' => array('/admin/index'),
-                                'visible' => !Yii::app()->user->isGuest
+                                'visible' => Yii::app()->user->isAdmin()
                             ),
                             array(
                                 'label' => 'Settings',

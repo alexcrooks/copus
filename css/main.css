@@ -54,6 +54,7 @@ blockquote p { margin-bottom: 10px; font-size: 12pt; }
 .table-observation-data td input { margin: 6px; }
 .table-observation-data td.data-taken { min-width: 20px; min-height: 20px; }
 .table-observation-data img.data-taken { width: 100%; height: 100%; }
+.table-observation-data td.right-border { border-right: 3px solid #000000; }
 
 .sidebar-nav-fixed { position: fixed; top: 100px; right: 10px; }
 

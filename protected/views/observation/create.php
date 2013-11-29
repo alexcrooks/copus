@@ -48,21 +48,21 @@
     <table class="table-observation-data form-horizontal" border="1">
         <tr class="header">
             <td rowspan="2">0. Min</td>
-            <td colspan="13">1. Students Doing</td>
+            <td class="right-border" colspan="13">1. Students Doing</td>
             <td colspan="12">2. Instructor Doing</td>
             <td rowspan="2">3. Eng</td>
             <td rowspan="2">4. Comments</td>
         </tr>
         <tr class="subheader">
             <?php foreach ($this->getTableElements() as $elementName => $elementDesc): ?>
-                <td title="<?php echo $elementDesc; ?>"><?php echo str_replace(array('student_', 'instructor_', 'DV', 'AD'), array('', '', 'D/V', 'Adm'), $elementName); ?></td>
+                <td<?php echo $elementName == 'student_O' ? ' class="right-border"' : '' ?> title="<?php echo $elementDesc; ?>"><?php echo str_replace(array('student_', 'instructor_', 'DV', 'AD'), array('', '', 'D/V', 'Adm'), $elementName); ?></td>
             <?php endforeach; ?>
         </tr>
         <tr class="row_to_clone">
             <td>0-2 min</td>
 
             <?php foreach ($this->getTableElements()  as $elementName => $elementDesc): ?>
-                <td title="<?php echo $elementDesc; ?>"><input type="checkbox" value="1" name="ObservationForm[table_<?php echo $elementName; ?>][0]" class="checkbox_reg" /></td>
+                <td<?php echo $elementName == 'student_O' ? ' class="right-border"' : '' ?> title="<?php echo $elementDesc; ?>"><input type="checkbox" value="1" name="ObservationForm[table_<?php echo $elementName; ?>][0]" class="checkbox_reg" /></td>
             <?php endforeach; ?>
 
             <td><select name="ObservationForm[table_Eng][0]" class="input-small"><option value="">?</option><option value="Low">Low</option><option value="Med">Med</option><option value="High">High</option></select></td>
