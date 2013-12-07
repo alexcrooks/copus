@@ -12,7 +12,7 @@
     )
 ); ?>
 <h2 class="form-signin-heading">Create Graph</h2>
-<?php $maxTimeArray = array(); $maxTimeArray[sizeof($timeArray) - 1] = array('selected' => true); print_r($maxTimeArray) ?>
+<?php $maxTimeArray = array(); $maxTimeArray[sizeof($timeArray) - 1] = array('selected' => true); ?>
 <?php echo $form->dropDownList($model, 'graphType', array('' => 'Graph Type', 'PieChart' => 'Pie Chart'), array('options' => array('PieChart' => array('selected' => true)))); ?>
 <?php echo $form->dropDownList($model, 'startTime', array_merge(array('' => 'Start Time'), $timeArray), array('options' => array(0 => array('selected' => true)))); ?>
 <?php echo $form->dropDownList($model, 'endTime', array_merge(array('' => 'End Time'), $timeArray), array('options' => $maxTimeArray)); ?>
