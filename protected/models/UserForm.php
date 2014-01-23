@@ -51,10 +51,18 @@ class UserForm extends CFormModel
         $user->last_name = $this->last_name;
         $user->role = $this->role;
 
-        if (YII_DEBUG == true)
+        if (YII_DEBUG == true || $this->id)
             return $user->save();
         else
             return $user->save() && $this->emailUser($user, $dirtyPassword);
+    }
+
+    public function resetPassword()
+    {
+        $user = User::model()->findByAttributes(array('id' => $this->id));
+        $dirtyPassword = uniqid();
+        $user->password = crypt($dirtyPassword);
+        return $user->save() && $this->emailUser($user, $dirtyPassword);
     }
 
     private function emailUser($user, $dirtyPassword)
