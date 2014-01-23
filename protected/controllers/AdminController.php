@@ -26,9 +26,7 @@ class AdminController extends Controller
     public function actionResetPassword()
     {
         $model = new UserForm;
-        $model->attributes = new stdClass();
-        $model->attributes->id = Yii::app()->user->id;
-
+        
         if ($model->resetPassword()) {
             $this->redirect(Yii::app()->createUrl('admin/index'));
         }
