@@ -4,7 +4,6 @@ $(document).ready(function () {
     var addRowInterval = 120; // in seconds
     var observationTime = 0;
     var currentlyObserving = false;
-    var modelTableRow = $('.row_to_clone').clone();
     setInterval(tick, updateClockInterval);
 
     $('.observation-toggle-legend').click(function () {
@@ -29,7 +28,7 @@ $(document).ready(function () {
         var secs = observationTime % 60;
         var mins = (observationTime - secs) / 60;
         var tick = (mins > 9 ? '' : '0') + mins + ':'
-            + (secs > 9 ? '' : '0') + secs
+            + (secs > 9 ? '' : '0') + secs;
         $('.observation-tick').html(tick);
 
         if (observationTime % addRowInterval == 0) {
@@ -56,7 +55,6 @@ function saveForm(e) {
     data: $form.serialize(),
     dataType: 'html',
     success: function(result) {
-      console.log(result);
       window.location = COPUS_ENDPOINT + '/site/index';
     },
     error: function(jqXHR, textStatus) {
