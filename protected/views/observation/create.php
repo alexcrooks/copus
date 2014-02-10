@@ -176,5 +176,10 @@
         </tr>
     </table>
     <input id="maxTime" type="hidden" name="ObservationForm[time]" value="0">
-    <input class="btn btn-primary" type="submit" value="Save">
+    <div class="alert alert-error js-not-responding">
+        <button type="button" class="close js-dismiss-alert">&times;</button>
+        The COPUS server is not responding. Please try saving later to preserve your data or press "Save Locally" to save the data to your computer.
+    </div>
+    <input class="btn btn-primary js-save" type="submit" value="Save">
+    <input class="btn btn-danger js-save-locally" type="submit" value="Save Locally">
 </form>

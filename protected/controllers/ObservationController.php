@@ -36,8 +36,11 @@ class ObservationController extends Controller
             $model = new Observation;
             $model->user_id = Yii::app()->user->id;
             $model->data = $formData;
-            if ($model->save())
-                $this->redirect(Yii::app()->createUrl('site/index'));
+            if ($model->save()) {
+                http_response_code();
+                return;
+            }
+            http_response_code(500);
         }
         $user = User::model()->findByAttributes(array('id' => Yii::app()->user->id));
         $this->render('create', array('user' => $user));

@@ -3,6 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="language" content="en">
+    <script type="text/javascript">
+        var COPUS_ENDPOINT = '<?php echo Yii::app()->createAbsoluteUrl() ?>';
+    </script>
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <?php
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/main.css');

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('.js-not-responding').hide();
     var updateClockInterval = 1000;
     var addRowInterval = 120; // in seconds
     var observationTime = 0;
@@ -36,7 +37,42 @@ $(document).ready(function () {
             $('#myModal').modal('show');
         }
     }
+
+  $(document).on('click', '.js-dismiss-alert', function() {
+    $(this).parent('.alert').hide();
+  });
+  $(document).on('click', '.js-save', saveForm);
+  $(document).on('click', '.js-save-locally', saveFormLocally);
 });
+
+function saveForm(e) {
+  e.preventDefault();
+  var $submitButton = $(e.target);
+  $submitButton.attr('disabled', 'disabled');
+  var $form = $submitButton.parents('form');
+  $.ajax({
+    type: 'POST',
+    url: COPUS_ENDPOINT + '/observation/create',
+    data: $form.serialize(),
+    dataType: 'html',
+    success: function(result) {
+      console.log(result);
+      window.location = COPUS_ENDPOINT + '/site/index';
+    },
+    error: function(jqXHR, textStatus) {
+      $('.js-not-responding').show();
+    },
+    complete: function() {
+      $submitButton.removeAttr('disabled');
+    }
+  });
+}
+
+function saveFormLocally(e) {
+  e.preventDefault();
+  var $form = $(e.target).parents('form');
+  window.open('data:text;charset=utf-8,' + $form.serialize());
+}
 
 // Sticky sidebar w/jQuery
 // @author https://gist.github.com/pinchyfingers/2414459
